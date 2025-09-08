@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    ports:
+      - "8081:80"
+    #volumes:  for testing nginx
+      #- ./requirements/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+  db:
+    build: ./requirements/MariaDB
+    container_name: MariaDB
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - /home/isrkik/data/wp_db_data:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+
+  wordpress:
+    build: ./requirements/WordPress
+    container_name: WordPress
+    depends_on:
+      - db
+    volumes:
+    - /home/isrkik/data/wp_files:/var/www/wordpress/wp-content
+    expose:
+      - "9000"
+    networks:
+      - inception
+    restart: always
+
+networks:
+  inception:
+    driver: bridge
