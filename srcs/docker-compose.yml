@@ -15,15 +15,12 @@ services:
   mariadb:
     build: ./requirements/MariaDB
     container_name: MariaDB
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wp_user
-      MYSQL_PASSWORD: wp_password
     volumes:
-      - /home/isrkik/data/wp_db_data:/var/lib/mysql
+      - wp_db_data:/var/lib/mysql
     networks:
       - inception
+    env_file:
+      - .env
     restart: always
 
   wordpress:
@@ -32,12 +29,27 @@ services:
     depends_on:
       - mariadb
     volumes:
-    - /home/isrkik/data/wp_data:/var/www/wordpress
+      - wp_data:/var/www/wordpress
     expose:
       - "9000"
     networks:
       - inception
     restart: always
+
+volumes:
+  wp_db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/isrkik/data/wp_db_data
+
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/isrkik/data/wp_data
 
 networks:
   inception:
