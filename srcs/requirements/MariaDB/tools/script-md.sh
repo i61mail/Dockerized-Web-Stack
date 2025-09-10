@@ -7,10 +7,10 @@ until mysqladmin ping --silent; do
     sleep 1
 done
 
-mariadb -u root -p"${ROOT_PASSWORD}" -e "CREATE DATABASE IF NOT EXISTS \`${DATA_BASE}\`;"
-mariadb -u root -p"${ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${USER}'@'%' IDENTIFIED BY '${PASSWORD}';"
-mariadb -u root -p"${ROOT_PASSWORD}" -e "GRANT ALL PRIVILEGES ON \`${DATA_BASE}\`.* TO '${USER}'@'%';"
-mariadb -u root -p"${ROOT_PASSWORD}"-e "FLUSH PRIVILEGES;"
+mysql -e "CREATE DATABASE IF NOT EXISTS \`${DATA_BASE}\`;"
+mysql -e "CREATE USER IF NOT EXISTS '${USER}'@'%' IDENTIFIED BY '${PASSWORD}';"
+mysql -e "GRANT ALL PRIVILEGES ON \`${DATA_BASE}\`.* TO '${USER}'@'%';"
+mysql -e "FLUSH PRIVILEGES;"
 
 kill $MYSQL_PID
 wait $MYSQL_PID 2>/dev/null || true 

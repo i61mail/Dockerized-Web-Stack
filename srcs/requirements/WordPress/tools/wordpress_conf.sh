@@ -19,15 +19,20 @@ fi
 chown -R www-data:www-data /var/www/wordpress
 chmod -R 755 /var/www/wordpress
 
-# If wp-config.php doesn’t exist, create it from sample
-if [ ! -f "$WP_PATH/wp-config.php" ]; then
-    echo "⚙️ Setting up wp-config.php..."
-    cp "$WP_PATH/wp-config-sample.php" "$WP_PATH/wp-config.php"
-    sed -i "s/database_name_here/${DATA_BASE}/" "$WP_PATH/wp-config.php"
-    sed -i "s/username_here/${USER}/" "$WP_PATH/wp-config.php"
-    sed -i "s/password_here/${PASSWORD}/" "$WP_PATH/wp-config.php"
-    sed -i "s/localhost/mariadb/" "$WP_PATH/wp-config.php"  # assuming your DB service name is mariadb
-    echo "✅ wp-config.php configured."
+if [ ! -f "$WP_PATH/wp-load.php" ]; then
+    echo "📥 WordPress not found or incomplete. Installing..."
+    
+    # Download to temp location first
+    wget -q https://wordpress.org/latest.zip -O /tmp/wordpress.zip
+    unzip -q /tmp/wordpress.zip -d /tmp/
+    
+    # Copy files to mounted volume
+    cp -r /tmp/wordpress/* "$WP_PATH/"
+    rm -rf /tmp/wordpress /tmp/wordpress.zip
+    
+    echo "✅ WordPress installed to mounted volume"
+else
+    echo "⚡ WordPress already exists in mounted volume"
 fi
 
 exec "$@"
