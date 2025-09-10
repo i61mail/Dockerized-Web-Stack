@@ -1,7 +1,6 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y php-fpm php-mysql \
-        php-xml php-mbstring php-curl php-gd php-zip php-intl wget unzip
+RUN apt-get update && apt-get install -y php php-fpm php-mysql wget unzip
 
 RUN wget https://wordpress.org/latest.zip -O /tmp/wordpress.zip && \
     unzip /tmp/wordpress.zip -d /var/www/ && \

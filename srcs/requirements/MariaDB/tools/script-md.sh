@@ -3,7 +3,7 @@
 mysqld_safe --datadir='/var/lib/mysql' &
 MYSQL_PID=$!
 
-until mysqladmin ping -u root -p"$ROOT_PASSWORD" --silent; do
+until mysqladmin ping --silent; do
     sleep 1
 done
 

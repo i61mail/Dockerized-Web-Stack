@@ -2,10 +2,11 @@ FROM debian:bookworm
 
 RUN apt-get update && apt-get install -y mariadb-server
 
-EXPOSE 3306
-
 COPY ./tools/script-md.sh /script-md.sh
 
 RUN chmod +x /script-md.sh
+
+HEALTHCHECK --interval=10s --timeout=5s --start-period=10s \
+  CMD mysqladmin ping || exit 1
 
 ENTRYPOINT ["./script-md.sh"]
