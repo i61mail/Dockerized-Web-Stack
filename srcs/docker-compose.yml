@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   nginx:
     image: nginx:inception
@@ -26,13 +24,20 @@ services:
     env_file:
       - .env
     restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
 
-  wordpress:
+  wordpress: #dont forget to add check for fastcgi server
     image: wordpress:inception
     build: ./requirements/WordPress
     container_name: WordPress
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     volumes:
       - wp_data:/var/www/wordpress
     expose:

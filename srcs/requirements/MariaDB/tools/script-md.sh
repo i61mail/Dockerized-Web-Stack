@@ -3,11 +3,7 @@
 mysqld_safe --datadir='/var/lib/mysql' &
 MYSQL_PID=$!
 
-# sleep 5 when im gonna add healthcheck
-
-until mysqladmin ping -u root -p"$ROOT_PASSWORD" --silent; do
-    sleep 1
-done
+sleep 5
 
 mysql -e "CREATE DATABASE IF NOT EXISTS $DATA_BASE;"
 mysql -e "CREATE USER IF NOT EXISTS '$USER'@'%' IDENTIFIED BY '$PASSWORD';"

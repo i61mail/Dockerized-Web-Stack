@@ -8,7 +8,4 @@ RUN sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.co
 
 RUN chmod +x /script-md.sh
 
-HEALTHCHECK --interval=10s --timeout=5s --start-period=10s \
-  CMD mysqladmin ping || exit 1
-
 ENTRYPOINT ["./script-md.sh"]

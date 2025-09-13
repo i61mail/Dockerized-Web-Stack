@@ -1,10 +1,6 @@
 #!/bin/bash
 
 WP_PATH="/var/www/wordpress"
-until mysqladmin ping -h mariadb --silent; do
-    echo "still waiting for MariaDB..."
-    sleep 1 # i need to remove this loop healthcheck in dockercompose
-done
 
 if [ ! -f "$WP_PATH/wp-config.php" ]; then
     echo ">> Setting up WordPress..."
