@@ -32,3 +32,6 @@ mdlogs:
 	@$(DOCKER_COMPOSE) logs mariadb
 
 re: fclean all
+
+build:
+	docker-compose build --no-cache
