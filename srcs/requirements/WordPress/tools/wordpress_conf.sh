@@ -3,7 +3,7 @@
 WP_PATH="/var/www/wordpress"
 until mysqladmin ping -h mariadb --silent; do
     echo "still waiting for MariaDB..."
-    sleep 2
+    sleep 1 # i need to remove this loop healthcheck in dockercompose
 done
 
 if [ ! -f "$WP_PATH/wp-config.php" ]; then
@@ -21,7 +21,7 @@ if [ ! -f "$WP_PATH/wp-config.php" ]; then
 
     wp core install \
         --path="$WP_PATH" \
-        --url="167.71.37.78" \
+        --url="$DOMAIN_NAME" \
         --title="$TITLE" \
         --admin_user="$ADMIN_NAME" \
         --admin_password="$ADMIN_PASSWORD" \

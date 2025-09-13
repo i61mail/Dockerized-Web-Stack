@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   nginx:
+    image: nginx:inception
     build: ./requirements/nginx
     container_name: nginx
     ports:
@@ -15,6 +16,7 @@ services:
     restart: always
 
   mariadb:
+    image: mariadb:inception
     build: ./requirements/MariaDB
     container_name: MariaDB
     volumes:
@@ -26,6 +28,7 @@ services:
     restart: always
 
   wordpress:
+    image: wordpress:inception
     build: ./requirements/WordPress
     container_name: WordPress
     depends_on:
