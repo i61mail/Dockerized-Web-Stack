@@ -33,5 +33,5 @@ mdlogs:
 
 re: fclean all
 
-build:
-	docker-compose build --no-cache
+freshbuild:
+	@$(DOCKER_COMPOSE) build --no-cache

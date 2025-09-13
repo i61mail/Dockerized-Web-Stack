@@ -15,7 +15,7 @@ services:
 
   mariadb:
     image: mariadb:inception
-    build: ./requirements/MariaDB
+    build: ./requirements/mariadb
     container_name: MariaDB
     volumes:
       - wp_db_data:/var/lib/mysql
@@ -33,7 +33,7 @@ services:
 
   wordpress: #dont forget to add check for fastcgi server
     image: wordpress:inception
-    build: ./requirements/WordPress
+    build: ./requirements/wordpress
     container_name: WordPress
     depends_on:
       mariadb:
