@@ -48,6 +48,21 @@ services:
       - .env
     restart: always
 
+  cadvisor:
+    image: cadvisor:inception
+    build: ./requirements/bonus/cadvisor
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro #some container stats, like filesystem usage, mounts, disk I/O
+      - /var/run:/var/run:ro # needed to talk to the container runtime and resolve some live container metadata
+      - /sys:/sys:ro # this is where linux exposes cgroups  (CPU/networks stats) ressource usage
+      - /var/lib/docker/:/var/lib/docker:ro # for tracking per-container filesystem usage (how much disk space each container takes)
+    networks:
+      - inception
+    restart: always
+
 volumes:
   wp_db_data:
     driver: local
