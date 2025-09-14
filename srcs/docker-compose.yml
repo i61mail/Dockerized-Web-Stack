@@ -72,6 +72,14 @@ services:
       - inception
     restart: always
 
+  adminer:
+    image: adminer:inception
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8081:80"
+
 volumes:
   website_data:
   wp_db_data:
