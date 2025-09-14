@@ -18,10 +18,17 @@ ngshell:
 	@docker exec -it nginx bash
 
 wpshell:
-	@docker exec -it WordPress bash
+	@docker exec -it wordpress bash
 
 mdbshell:
-	@docker exec -it MariaDB bash
+	@docker exec -it mariadb bash
+
+siteshell:
+	@docker exec -it website bash
+
+cvshell:
+	@docker exec -it cadvisor bash
+
 nglogs:
 	@$(DOCKER_COMPOSE) logs nginx
 
@@ -31,7 +38,13 @@ wplogs:
 mdlogs:
 	@$(DOCKER_COMPOSE) logs mariadb
 
+sitelogs:
+	@$(DOCKER_COMPOSE) logs website
+
+cvlogs:
+	@$(DOCKER_COMPOSE) logs cadvisor
+
 re: fclean all
 
-freshbuild:
+freshbuild: fclean
 	@$(DOCKER_COMPOSE) build --no-cache

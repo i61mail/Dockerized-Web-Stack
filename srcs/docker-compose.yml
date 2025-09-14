@@ -9,6 +9,7 @@ services:
       - wordpress
     volumes:
       - wp_data:/var/www/wordpress
+      - website_data:/usr/share/website:ro
     networks:
       - inception
     restart: always
@@ -16,7 +17,7 @@ services:
   mariadb:
     image: mariadb:inception
     build: ./requirements/mariadb
-    container_name: MariaDB
+    container_name: mariadb
     volumes:
       - wp_db_data:/var/lib/mysql
     networks:
@@ -34,7 +35,7 @@ services:
   wordpress: #dont forget to add check for fastcgi server
     image: wordpress:inception
     build: ./requirements/wordpress
-    container_name: WordPress
+    container_name: wordpress
     depends_on:
       mariadb:
         condition: service_healthy
@@ -48,12 +49,12 @@ services:
       - .env
     restart: always
 
-  cadvisor:
+  cadvisor: #dont forget to check https
     image: cadvisor:inception
     build: ./requirements/bonus/cadvisor
     container_name: cadvisor
     ports:
-      - "8080:8080"
+      - "8082:8080"
     volumes:
       - /:/rootfs:ro #some container stats, like filesystem usage, mounts, disk I/O
       - /var/run:/var/run:ro # needed to talk to the container runtime and resolve some live container metadata
@@ -63,7 +64,16 @@ services:
       - inception
     restart: always
 
+  website:
+    image: website:inception
+    build: ./requirements/bonus/website
+    container_name: website
+    networks:
+      - inception
+    restart: always
+
 volumes:
+  website_data:
   wp_db_data:
     driver: local
     driver_opts:

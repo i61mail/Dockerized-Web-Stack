@@ -16,6 +16,4 @@ RUN git clone https://github.com/google/cadvisor.git .
 
 RUN make build
 
-EXPOSE 8080
-
 CMD ["./_output/cadvisor"]

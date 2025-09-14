@@ -2,8 +2,6 @@ FROM debian:bookworm
 
 RUN apt-get update
 
-COPY ./website.sh /website.sh
+RUN mkdir -p /usr/share/website
 
-RUN chmod +x /website.sh
-
-ENTRYPOINT ["./website.sh"]
+COPY ./index.html /usr/share/website
