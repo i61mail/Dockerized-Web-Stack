@@ -68,6 +68,8 @@ services:
     image: website:inception
     build: ./requirements/bonus/website
     container_name: website
+    volumes:
+      - website_data:/usr/share/website:ro
     networks:
       - inception
     restart: always
