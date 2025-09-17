@@ -9,7 +9,6 @@ services:
       - wordpress
     volumes:
       - wp_data:/var/www/wordpress
-      - website_data:/usr/share/website:ro
     networks:
       - inception
     restart: always
@@ -68,8 +67,8 @@ services:
     image: website:inception
     build: ./requirements/bonus/website
     container_name: website
-    volumes:
-      - website_data:/usr/share/website:ro
+    ports:
+      - "8083:80"
     networks:
       - inception
     restart: always
@@ -81,9 +80,10 @@ services:
     restart: always
     ports:
       - "8081:80"
+    networks:
+      - inception
 
 volumes:
-  website_data:
   wp_db_data:
     driver: local
     driver_opts:
