@@ -29,6 +29,12 @@ siteshell:
 cvshell:
 	@docker exec -it cadvisor bash
 
+adshell:
+	@docker exec -it adminer bash
+
+rcshell:
+	@docker exec -it redis_cache bash
+
 nglogs:
 	@$(DOCKER_COMPOSE) logs nginx
 
@@ -43,6 +49,12 @@ sitelogs:
 
 cvlogs:
 	@$(DOCKER_COMPOSE) logs cadvisor
+
+adlogs:
+	@$(DOCKER_COMPOSE) logs adminer
+
+rclogs:
+	@$(DOCKER_COMPOSE) logs redis_cache
 
 re: fclean all
 

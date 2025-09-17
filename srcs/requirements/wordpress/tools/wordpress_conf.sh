@@ -15,6 +15,11 @@ if [ ! -f "$WP_PATH/wp-config.php" ]; then
 
     wp user create --path="$WP_PATH" "$USER_NAME" "$USER_MAIL" \
         --user_pass="$USER_PASSWORD" --role="$USER_ROLE" --allow-root
+
+    wp config set WP_REDIS_HOST "$REDIS_CACHE_HOST" --allow-root --path="$WP_PATH"
+    wp config set WP_REDIS_PORT "$REDIS_CACHE_PORT" --allow-root --path="$WP_PATH"
+    wp plugin install redis-cache --activate --allow-root --path="$WP_PATH"
+    wp redis enable --allow-root --path="$WP_PATH"
 fi
 
 chown -R www-data:www-data "$WP_PATH"
