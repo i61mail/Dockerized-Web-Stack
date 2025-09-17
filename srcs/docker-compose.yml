@@ -82,6 +82,14 @@ services:
       - "8081:80"
     networks:
       - inception
+    
+  redis_cache:
+    image: redis_cache:inception
+    build: ./requirements/bonus/redis_cache
+    container_name: redis_cache
+    restart: always
+    networks:
+      - inception
 
 volumes:
   wp_db_data:
