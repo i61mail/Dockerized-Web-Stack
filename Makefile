@@ -35,6 +35,9 @@ adshell:
 rcshell:
 	@docker exec -it redis_cache bash
 
+ftpshell:
+	@docker exec -it ftp bash
+
 nglogs:
 	@$(DOCKER_COMPOSE) logs nginx
 
@@ -55,6 +58,9 @@ adlogs:
 
 rclogs:
 	@$(DOCKER_COMPOSE) logs redis_cache
+
+ftplogs:
+	@$(DOCKER_COMPOSE) logs ftp
 
 re: fclean all
 

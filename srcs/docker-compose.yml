@@ -90,6 +90,18 @@ services:
     restart: always
     networks:
       - inception
+  ftp:
+    image: ftp:inception
+    build: ./requirements/bonus/ftp
+    container_name: ftp
+    restart: always
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    volumes:
+      - wp_data:/home/user_ftp
+    networks:
+      - inception
 
 volumes:
   wp_db_data:
