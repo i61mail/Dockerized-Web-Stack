@@ -13,10 +13,58 @@
     }
     h1 { color: #006600; }
     p  { color: #444; }
+  @keyframes anotherAnimation {
+          0% {
+            font-size: 16px;
+          }
+          50% {
+            font-size: 30px;
+          }
+          100% {
+             font-size: 16px;
+          }
+        }
+    .here {
+      animation-name: anotherAnimation;
+       animation-duration: 2s; /* How long the animation takes */
+      animation-iteration-count: infinite;
+    }
+    .ff {
+      margin : 0 auto;
+    }
   </style>
 </head>
 <body>
   <h1>Welcome!</h1>
   <p>This is a simple page with a light green background.</p>
+  <h1 class="here">Click Here</h1>
+  <div>
+
+    <img class="ff" width="100" src="https://static.vecteezy.com/system/resources/previews/017/785/074/non_2x/bottom-arrow-icon-on-transparent-background-free-png.png" alt="" srcset="">
+  </div>
+  <img id="img" onclick="Update()" src="https://cdn.intra.42.fr/users/120a8c6512b2a67318505d4f611207c0/rmouhcin.jpg" alt="" srcset="">
 </body>
+<script>
+  let arr = ["https://cdn.intra.42.fr/users/120a8c6512b2a67318505d4f611207c0/rmouhcin.jpg",
+            "https://cdn.intra.42.fr/users/687783282d7297820c906ee7166865ad/isrkik.jpg",
+            "https://cdn.intra.42.fr/users/4bac8b100410e1ac0a6cdb2f3406c14d/zderfouf.jpg"
+
+  ];
+  console.log("ff");
+  function Update()
+  {
+    const img = document.getElementById("img");
+    if (img.getAttribute("src").length == 0)
+      img.setAttribute("src",arr[0]);
+    else {
+      let i = arr.indexOf(img.getAttribute("src"),0);    
+      if (i + 1 < arr.length)
+        img.setAttribute("src",arr[i + 1]);
+      else
+        img.setAttribute("src",arr[0]);
+
+      
+    }
+  }
+</script>
 </html>

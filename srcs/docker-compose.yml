@@ -31,7 +31,7 @@ services:
       retries: 10
       start_period: 10s
 
-  wordpress: #dont forget to add check for fastcgi server
+  wordpress:
     image: wordpress:inception
     build: ./requirements/wordpress
     container_name: wordpress
@@ -40,25 +40,23 @@ services:
         condition: service_healthy
     volumes:
       - wp_data:/var/www/wordpress
-    expose:
-      - "9000"
     networks:
       - inception
     env_file:
       - .env
     restart: always
 
-  cadvisor: #dont forget to check https
+  cadvisor:
     image: cadvisor:inception
     build: ./requirements/bonus/cadvisor
     container_name: cadvisor
     ports:
       - "8082:8080"
     volumes:
-      - /:/rootfs:ro #some container stats, like filesystem usage, mounts, disk I/O
-      - /var/run:/var/run:ro # needed to talk to the container runtime and resolve some live container metadata
-      - /sys:/sys:ro # this is where linux exposes cgroups  (CPU/networks stats) ressource usage
-      - /var/lib/docker/:/var/lib/docker:ro # for tracking per-container filesystem usage (how much disk space each container takes)
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
     networks:
       - inception
     restart: always
@@ -80,6 +78,8 @@ services:
     restart: always
     ports:
       - "8081:80"
+    depends_on:
+      - mariadb
     networks:
       - inception
     
@@ -88,8 +88,11 @@ services:
     build: ./requirements/bonus/redis_cache
     container_name: redis_cache
     restart: always
+    depends_on:
+      - wordpress
     networks:
       - inception
+
   ftp:
     image: ftp:inception
     build: ./requirements/bonus/ftp
@@ -100,6 +103,8 @@ services:
       - "21000-21010:21000-21010"
     volumes:
       - wp_data:/home/user_ftp
+    depends_on:
+      - wordpress
     networks:
       - inception
 
