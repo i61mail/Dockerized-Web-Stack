@@ -4,12 +4,10 @@ RUN apt-get update && apt-get install -y vsftpd vim
 
 COPY ./conf/vsftpd.conf /etc/vsftpd.conf
 
-RUN useradd -m user_ftp && echo "user_ftp:pw_ftp" | chpasswd
+COPY ./tools/ftp.sh /ftp.sh
 
-RUN mkdir -p /var/run/vsftpd/empty && \
-    chmod 555 /var/run/vsftpd/empty && \
-    chown root:root /var/run/vsftpd/empty
+RUN chmod +x /ftp.sh
 
 EXPOSE 21 21000-21010
 
-ENTRYPOINT ["vsftpd", "/etc/vsftpd.conf"]
+ENTRYPOINT ["/ftp.sh"]
