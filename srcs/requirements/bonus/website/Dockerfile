@@ -8,4 +8,4 @@ COPY ./index.html /usr/share/website
 
 COPY ./conf/ng.conf /etc/nginx/nginx.conf
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

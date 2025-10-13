@@ -16,4 +16,4 @@ RUN git clone https://github.com/google/cadvisor.git .
 
 RUN make build
 
-CMD ["./_output/cadvisor"]
+ENTRYPOINT ["./_output/cadvisor"]

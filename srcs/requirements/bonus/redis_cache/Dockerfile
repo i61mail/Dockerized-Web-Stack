@@ -6,4 +6,4 @@ COPY ./conf/redis_cache.conf /etc/redis/redis_cache.conf
 
 EXPOSE 6379
 
-CMD ["redis-server", "/etc/redis/redis_cache.conf"]
+ENTRYPOINT ["redis-server", "/etc/redis/redis_cache.conf"]

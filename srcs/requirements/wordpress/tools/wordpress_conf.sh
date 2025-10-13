@@ -23,4 +23,4 @@ if [ ! -f "$WP_PATH/wp-config.php" ]; then
 fi
 
 chown -R www-data:www-data "$WP_PATH"
-exec php-fpm8.2 -F
+exec php-fpm8.2 -F 
