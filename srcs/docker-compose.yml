@@ -83,10 +83,10 @@ services:
     networks:
       - inception
     
-  redis_cache:
-    image: redis_cache:inception
-    build: ./requirements/bonus/redis_cache
-    container_name: redis_cache
+  redis:
+    image: redis:inception
+    build: ./requirements/bonus/redis
+    container_name: redis
     restart: always
     depends_on:
       - wordpress

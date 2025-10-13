@@ -33,7 +33,7 @@ adshell:
 	@docker exec -it adminer bash
 
 rcshell:
-	@docker exec -it redis_cache bash
+	@docker exec -it redis bash
 
 ftpshell:
 	@docker exec -it ftp bash
@@ -57,7 +57,7 @@ adlogs:
 	@$(DOCKER_COMPOSE) logs adminer
 
 rclogs:
-	@$(DOCKER_COMPOSE) logs redis_cache
+	@$(DOCKER_COMPOSE) logs redis
 
 ftplogs:
 	@$(DOCKER_COMPOSE) logs ftp
