@@ -147,7 +147,12 @@ This command will:
 - **Adminer**: [http://localhost:8081](http://localhost:8081)
 - **cAdvisor**: [http://localhost:8082](http://localhost:8082)
 - **Static Website**: [http://localhost:8083](http://localhost:8083)
-- **FTP**: ftp://localhost:21 (user: `user_ftp`, password: `pw_ftp`)
+- **FTP Server**: `localhost:21` - Access via FTP client (credentials: `user_ftp` / `pw_ftp`)
+```bash
+  ftp localhost 21
+  # or
+  lftp -u user_ftp,pw_ftp localhost
+```
 
 ---
 
