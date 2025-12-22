@@ -150,8 +150,6 @@ This command will:
 - **FTP Server**: `localhost:21` - Access via FTP client (credentials: `user_ftp` / `pw_ftp`)
 ```bash
   ftp localhost 21
-  # or
-  lftp -u user_ftp,pw_ftp localhost
 ```
 
 ---
