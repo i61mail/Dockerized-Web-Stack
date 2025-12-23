@@ -1,0 +1,23 @@
+.square {
+    background-color: #361500;
+    border: #361500 5px solid;
+    width: clamp(100px, 80vw, 700px);
+    height: clamp(100px, 80vw, 700px);
+    display: grid;
+    grid-template-columns:  repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    margin: 20px auto;
+}
+
+.square div {
+    background-color: #CC9544;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(2rem, 10vw, 10rem);
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
